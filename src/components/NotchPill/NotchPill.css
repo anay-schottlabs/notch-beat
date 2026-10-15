@@ -1,0 +1,48 @@
+.pill {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.pill__wing {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+
+.pill__mark {
+  --note: var(--lane-f);
+  display: grid;
+  place-items: center;
+  width: 11px;
+  height: 11px;
+}
+
+.pill__mark--j {
+  --note: var(--lane-j);
+}
+
+.pill__logo,
+.pill__glow {
+  grid-area: 1 / 1;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+/* A glossy note: soft highlight, no ring (a ringed red dot reads as "recording"). */
+.pill__logo {
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.55), transparent 55%),
+    var(--note);
+  will-change: transform;
+}
+
+/* Static blur; only its opacity animates. */
+.pill__glow {
+  background: var(--note);
+  filter: blur(5px);
+  transform: scale(1.5);
+  opacity: 0;
+  will-change: opacity;
+}

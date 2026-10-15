@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>NSAppleEventsUsageDescription</key>
+  <string>NotchBeat uses Apple Events to read the current Spotify track and to send play, pause, next and previous commands. It never controls any other app.</string>
+  <key>NSAudioCaptureUsageDescription</key>
+  <string>NotchBeat listens to Spotify's audio only, to animate the island and line notes up with the beat. Audio is analysed on this Mac in real time and is never recorded, stored or sent anywhere.</string>
+  <!-- Not a game as far as macOS is concerned: no Game Mode, no Games menu bar item. -->
+  <key>LSSupportsGameMode</key>
+  <false/>
+  <key>LSUIElement</key>
+  <true/>
+</dict>
+</plist>

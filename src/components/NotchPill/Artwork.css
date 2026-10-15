@@ -1,0 +1,12 @@
+.artwork {
+  flex: none;
+  display: block;
+  object-fit: cover;
+  background: var(--surface-2);
+}
+
+.artwork--glyph {
+  display: grid;
+  place-items: center;
+  color: var(--text-dim);
+}

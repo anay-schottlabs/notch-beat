@@ -1,0 +1,158 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel__notch-row {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.panel__wing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.panel__wing--right {
+  justify-content: flex-end;
+}
+
+.panel__title {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.panel__artist {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.panel__body {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel__lane {
+  position: relative;
+}
+
+.panel__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.panel__actions .block {
+  height: 100%;
+}
+
+/* Big, chunky, pressable blocks. */
+.block {
+  height: 40px;
+  border-radius: 11px;
+  background: #222 !important;
+  color: #fff;
+  font-weight: 800;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.45);
+  transition: transform 0.07s, box-shadow 0.07s, filter 0.12s, background-color 0.3s;
+}
+
+.block:hover:not(:disabled) {
+  filter: brightness(1.18);
+}
+
+.block:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.45);
+}
+
+.block--accent {
+  background: var(--lane-f) !important;
+  color: var(--on-lane-f);
+}
+
+.block--icon {
+  width: 46px;
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+
+.block--icon[data-on="true"] {
+  background: var(--lane-j) !important;
+  color: var(--on-lane-j);
+}
+
+.block--play {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+
+.consent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px 0 14px;
+  border-radius: 14px;
+  background: #161616;
+  animation: consent-in 0.18s var(--ease-out);
+}
+
+.consent p {
+  margin: 0;
+  flex: 1;
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--text-dim);
+}
+
+.consent strong,
+.consent em {
+  color: #fff;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.consent .block {
+  height: 36px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+@keyframes consent-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.sync-toast {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.75);
+  font-size: 11px;
+  font-weight: 800;
+  pointer-events: none;
+}

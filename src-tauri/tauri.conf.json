@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "NotchBeat",
+  "version": "0.1.0",
+  "identifier": "com.notchbeat.app",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "macOSPrivateApi": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "NotchBeat",
+        "width": 420,
+        "height": 32,
+        "decorations": false,
+        "transparent": true,
+        "shadow": false,
+        "resizable": false,
+        "maximizable": false,
+        "minimizable": false,
+        "focus": false,
+        "visible": false,
+        "skipTaskbar": true,
+        "acceptFirstMouse": true,
+        "visibleOnAllWorkspaces": true
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' https://i.scdn.co https://*.spotifycdn.com data:; style-src 'self' 'unsafe-inline'; connect-src ipc: http://ipc.localhost https://open.spotify.com https://i.scdn.co https://*.spotifycdn.com"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "app",
+      "dmg"
+    ],
+    "category": "Music",
+    "shortDescription": "A rhythm game that lives in your MacBook's notch",
+    "macOS": {
+      "minimumSystemVersion": "26.0",
+      "signingIdentity": "-",
+      "hardenedRuntime": false
+    },
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "externalBin": [
+      "binaries/notchbeat-audiotap"
+    ]
+  }
+}

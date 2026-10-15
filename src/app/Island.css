@@ -1,0 +1,144 @@
+/*
+ * The island's black shape animates its width/height (a small, isolated box);
+ * everything inside is fixed-size and positioned from the top centre, so the
+ * shape reveals content rather than relaying it out. Per-frame effects only
+ * touch transform/opacity.
+ */
+.island-shell {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  contain: layout style;
+  transition:
+    width 0.6s var(--ease-spring),
+    height 0.6s var(--ease-spring);
+}
+
+.island-shell[data-mode="collapsing"] {
+  transition-duration: 0.42s;
+  transition-timing-function: var(--ease-out);
+}
+
+.island {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--island);
+  border-radius: 0 0 var(--radius) var(--radius);
+  transition: border-radius 0.45s var(--ease-out);
+}
+
+.island[data-clickable="true"] {
+  cursor: pointer;
+}
+
+/* Concave corners where the island meets the screen's top edge, like the real notch. */
+.island-flare {
+  position: absolute;
+  top: 0;
+  width: var(--flare);
+  height: var(--flare);
+  pointer-events: none;
+}
+
+.island-flare--left {
+  right: 100%;
+  background: radial-gradient(circle at 0 100%, transparent calc(var(--flare) - 0.5px), var(--island) var(--flare));
+}
+
+.island-flare--right {
+  left: 100%;
+  background: radial-gradient(circle at 100% 100%, transparent calc(var(--flare) - 0.5px), var(--island) var(--flare));
+}
+
+/* Song-coloured glow: fixed size and position, so it's rasterised once and just clipped. */
+.island__glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(130% 100% at 50% 130%, var(--glow), transparent 75%);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.island-shell[data-mode="expanded"] .island__glow {
+  opacity: 1;
+}
+
+/* Beat pulse along the bottom edge; JS sets its transform/opacity each frame. */
+.island__pulse {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--lane-f);
+  opacity: 0;
+  transform: translateX(-50%) scaleX(0.4);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* Drop flash: a burst of the song's colour, animated on opacity only. */
+.island__flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 140% at 50% 0%, var(--lane-f), var(--lane-j) 60%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.island__layer {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.island__compact {
+  transition: opacity 0.18s var(--ease-out) 0.12s;
+}
+
+.island-shell:not([data-mode="compact"]) .island__compact {
+  opacity: 0;
+  transition-delay: 0s;
+  transition-duration: 0.1s;
+  pointer-events: none;
+}
+
+.island__expanded {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-6px);
+  transition:
+    opacity 0.12s,
+    transform 0.12s,
+    visibility 0s linear 0.12s;
+  will-change: opacity, transform;
+}
+
+.island-shell[data-mode="expanded"] .island__expanded {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%);
+  transition:
+    opacity 0.3s var(--ease-out) 0.1s,
+    transform 0.4s var(--ease-out) 0.1s,
+    visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .island-shell,
+  .island-shell[data-mode="collapsing"] {
+    transition-duration: 0.18s;
+    transition-timing-function: ease-out;
+  }
+  .island__pulse {
+    display: none;
+  }
+}
